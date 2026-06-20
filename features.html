@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Features — iHomeMap</title>
+  <meta name="description" content="All iHomeMap features: LiDAR scanning, manual correction, 7 door types, PDF export, 3D USDZ, and multi-floor property management.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <nav>
+    <a class="nav-logo" href="index.html"><b>i</b>HomeMap</a>
+    <div class="nav-links">
+      <a href="features.html">Features</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="support.html">Support</a>
+    </div>
+    <a class="nav-cta" href="https://apps.apple.com/ca/app/ihomemap/id6770341864">↗ App Store</a>
+    <div class="nav-progress" id="navProgress"></div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="section-tag">Features</div>
+    <div class="section-title">Everything you need.<br>Nothing you don't.</div>
+  </div>
+
+  <section class="section" style="padding-top:0">
+    <div class="section-inner">
+
+      <!-- Feature 1: LiDAR Precision -->
+      <div class="two-col reveal" style="gap:64px;margin-bottom:80px">
+        <div>
+          <div class="f-icon">📐</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;margin:12px 0 16px;letter-spacing:-0.3px">LiDAR Precision</h3>
+          <p style="color:var(--muted);line-height:1.85;margin-bottom:12px">Apple RoomPlan + LiDAR detects walls, doors, windows, and furniture to centimetre accuracy in real-time. Works in rooms up to ~10m × 10m.</p>
+          <p style="color:var(--muted);line-height:1.85">Accuracy degrades near mirrors and glass — the manual correction tools let you fix those areas in seconds.</p>
+        </div>
+        <div class="step-asset reveal reveal-delay-2" style="min-height:280px">
+          ASSET: features-lidar.png<br>
+          <span style="font-size:10px;opacity:0.6">→ src="assets/features-lidar.png"<br>Ideal: app screenshot showing live LiDAR scan with room overlay, 390×844px</span>
+        </div>
+      </div>
+
+      <!-- Feature 2: Manual Correction (image left) -->
+      <div class="two-col reveal" style="gap:64px;margin-bottom:80px">
+        <div class="step-asset reveal reveal-delay-1" style="min-height:280px">
+          ASSET: features-correction.png<br>
+          <span style="font-size:10px;opacity:0.6">→ src="assets/features-correction.png"<br>Ideal: correction canvas with element selected and edit sheet open</span>
+        </div>
+        <div>
+          <div class="f-icon">✏️</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;margin:12px 0 16px;letter-spacing:-0.3px">Manual Correction</h3>
+          <p style="color:var(--muted);line-height:1.85;margin-bottom:12px">Tap any element to fine-tune: adjust wall lengths, flip door swing directions, or choose from 7 door types — swing, sliding, folding, revolving, double swing, shutter, and patio.</p>
+          <p style="color:var(--muted);line-height:1.85">Every change is undoable. The canvas updates live as you edit.</p>
+        </div>
+      </div>
+
+      <!-- Feature 3: PDF Export -->
+      <div class="two-col reveal" style="gap:64px;margin-bottom:80px">
+        <div>
+          <div class="f-icon">📄</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;margin:12px 0 16px;letter-spacing:-0.3px">PDF Export</h3>
+          <p style="color:var(--muted);line-height:1.85;margin-bottom:12px">Professional multi-page PDFs with labelled rooms, dimension lines, north arrow, scale bar, and your property's full address header.</p>
+          <p style="color:var(--muted);line-height:1.85">Share via AirDrop, email, or save to Files. $4.99 CAD per export — no subscription.</p>
+        </div>
+        <div class="step-asset reveal reveal-delay-2" style="min-height:280px">
+          ASSET: features-pdf.png<br>
+          <span style="font-size:10px;opacity:0.6">→ src="assets/features-pdf.png"<br>Ideal: exported PDF preview showing floor plan with dimension lines</span>
+        </div>
+      </div>
+
+      <!-- Feature 4: 3D USDZ (image left) -->
+      <div class="two-col reveal" style="gap:64px;margin-bottom:80px">
+        <div class="step-asset reveal reveal-delay-1" style="min-height:280px">
+          ASSET: features-usdz.png<br>
+          <span style="font-size:10px;opacity:0.6">→ src="assets/features-usdz.png"<br>Ideal: QuickLook 3D model preview on iPhone</span>
+        </div>
+        <div>
+          <div class="f-icon">🧊</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;margin:12px 0 16px;letter-spacing:-0.3px">3D USDZ Model</h3>
+          <p style="color:var(--muted);line-height:1.85;margin-bottom:12px">Every scan generates a USDZ 3D model for AR preview via QuickLook — share it or open on any Apple device instantly. Always free.</p>
+          <p style="color:var(--muted);line-height:1.85">Walk clients through a room virtually before they visit in person.</p>
+        </div>
+      </div>
+
+      <!-- Feature 5: Multi-Floor -->
+      <div class="two-col reveal" style="gap:64px;margin-bottom:80px">
+        <div>
+          <div class="f-icon">🏠</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;margin:12px 0 16px;letter-spacing:-0.3px">Multi-Floor Properties</h3>
+          <p style="color:var(--muted);line-height:1.85;margin-bottom:12px">Organise by property → floor → room. Build a complete picture of any multi-storey home across multiple sessions.</p>
+          <p style="color:var(--muted);line-height:1.85">All floors export together into one structured PDF.</p>
+        </div>
+        <div class="step-asset reveal reveal-delay-2" style="min-height:280px">
+          ASSET: features-multifloor.png<br>
+          <span style="font-size:10px;opacity:0.6">→ src="assets/features-multifloor.png"<br>Ideal: property list or floor navigator UI screenshot</span>
+        </div>
+      </div>
+
+      <!-- Feature 6: Pricing model -->
+      <div class="two-col reveal" style="gap:64px;margin-bottom:40px">
+        <div class="step-asset reveal reveal-delay-1" style="min-height:280px">
+          ASSET: features-export.png<br>
+          <span style="font-size:10px;opacity:0.6">→ src="assets/features-export.png"<br>Ideal: export flow or share sheet screenshot</span>
+        </div>
+        <div>
+          <div class="f-icon">🎟️</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;margin:12px 0 16px;letter-spacing:-0.3px">Free to Scan, $4.99 to Export</h3>
+          <p style="color:var(--muted);line-height:1.85;margin-bottom:12px">Scanning and correction are always free. Pay $4.99 CAD per PDF export — no subscriptions, no bundles, no surprises.</p>
+          <p style="color:var(--muted);line-height:1.85">Credits never expire. High-volume users can contact us for enterprise pricing.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><b>i</b>HomeMap</a>
+        <p>LiDAR-powered floor plans for homeowners, agents, and landlords. Built for iOS with Apple RoomPlan.</p>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul>
+          <li><a href="features.html">Features</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="roadmap.html">Roadmap</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Support</h5>
+        <ul>
+          <li><a href="support.html">FAQ</a></li>
+          <li><a href="mailto:support@ihomemap.com">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 iHomeMap. All rights reserved.</span>
+      <span>iOS 16+ · Requires LiDAR · App Store</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

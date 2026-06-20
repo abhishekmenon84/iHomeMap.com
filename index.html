@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iHomeMap — LiDAR Floor Plans for iPhone</title>
+  <meta name="description" content="iHomeMap turns your iPhone's LiDAR into professional floor plans in minutes. Scan, correct, export PDF. Free to scan, $4.99 CAD per export.">
+  <meta property="og:title" content="iHomeMap — LiDAR Floor Plans">
+  <meta property="og:description" content="Point your iPhone at any room. Get a professional 2D floor plan in under 5 minutes.">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html"><b>i</b>HomeMap</a>
+  <div class="nav-links">
+    <a href="features.html">Features</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="support.html">Support</a>
+  </div>
+  <a class="nav-cta" href="https://apps.apple.com/ca/app/ihomemap/id6770341864">↗ App Store</a>
+  <div class="nav-progress" id="navProgress"></div>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">LiDAR · Apple RoomPlan · iOS 16+</div>
+      <h1 class="display">Your home,<br><span class="blue">precisely</span><br><span class="dim-word">measured.</span></h1>
+      <p class="hero-sub">Point your iPhone at any room. Walk around. Get a professional 2D floor plan and 3D model in under 5 minutes — accurate to the centimetre.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-p" href="#">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Download Free
+        </a>
+        <a class="btn btn-g" href="#scan-section">▶ &nbsp;Watch Scan</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="num" data-count="5">0</div><div class="lbl">min per room</div></div>
+        <div class="stat"><div class="num" data-count="7">0</div><div class="lbl">door types</div></div>
+        <div class="stat"><div class="num">PDF</div><div class="lbl">+ USDZ 3D</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone-zone">
+        <div style="font-size:48px;opacity:0.3;margin-bottom:16px;">📱</div>
+        <div class="phone-zone-label">Hero Screenshot</div>
+        <div class="phone-zone-hint">Best App Store screenshot showing floor plan canvas or scan in progress.<br><br>Ideal: 390×844px PNG (iPhone 15 Pro ratio). Use a device frame mockup.</div>
+        <code>&lt;img src="assets/hero-screenshot.png" alt="iHomeMap floor plan"&gt;</code>
+      </div>
+      <div class="glass-chip bottom-left">
+        <div class="chip-label">Latest scan</div>
+        <div class="chip-val">Living Room</div>
+        <div class="chip-sub">342 sq ft · 4 walls detected</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════ SCROLL-DRIVEN SCAN ══════════════ -->
+<section id="scan-section">
+  <div id="scan-sticky">
+    <canvas id="scan-canvas"></canvas>
+    <div class="scan-overlay">
+      <div class="scan-live-badge">Live scan animation</div>
+      <div class="scan-headline" id="scan-headline">Point. Walk. Done.</div>
+      <div class="scan-sub" id="scan-sub">Scroll to watch iHomeMap detect your room in real-time</div>
+      <div class="scan-progress-bar"><div class="scan-progress-fill" id="scanFill"></div></div>
+      <div class="scan-step-label" id="scanStepLabel"></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════ FEATURES ══════════════ -->
+<section class="section" id="features">
+  <div class="section-inner">
+    <div class="section-tag reveal">Features</div>
+    <div class="section-title reveal reveal-delay-1">Everything you need.<br>Nothing you don't.</div>
+    <div class="features-grid">
+      <div class="f-card reveal reveal-delay-1"><div class="f-icon">📐</div><h4>LiDAR Precision</h4><p>Uses Apple RoomPlan + LiDAR to detect walls, doors, windows, and furniture to centimetre accuracy in real-time.</p></div>
+      <div class="f-card reveal reveal-delay-2"><div class="f-icon">✏️</div><h4>Manual Correction</h4><p>Tap any element to fine-tune: adjust wall lengths, flip door swing directions, or choose from 7 door types including sliding, folding, and revolving.</p></div>
+      <div class="f-card reveal reveal-delay-3"><div class="f-icon">📄</div><h4>PDF Export</h4><p>Professional multi-page PDFs: labelled rooms, dimension lines, north arrow, scale bar, and your property's full address header.</p></div>
+      <div class="f-card reveal reveal-delay-1"><div class="f-icon">🧊</div><h4>3D USDZ Model</h4><p>Every scan generates a USDZ 3D model for AR preview via QuickLook — share it or open on any Apple device instantly.</p></div>
+      <div class="f-card reveal reveal-delay-2"><div class="f-icon">🏠</div><h4>Multi-Floor Properties</h4><p>Organise by property → floor → room. Build a complete picture of any multi-storey home across multiple sessions.</p></div>
+      <div class="f-card reveal reveal-delay-3"><div class="f-icon">🎟️</div><h4>Free to Scan, $4.99 to Export</h4><p>Scanning and correction are always free. Pay $4.99 CAD per PDF export — no subscriptions, no bundles, no surprises.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════ AUDIENCE ══════════════ -->
+<section class="section" style="background:var(--navy2)">
+  <div class="section-inner">
+    <div class="section-tag reveal">Who It's For</div>
+    <div class="section-title reveal reveal-delay-1">Built for two types of people.<br>Perfect for both.</div>
+    <div class="audience-grid">
+      <div class="a-card reveal reveal-delay-1">
+        <span class="a-emoji">🏡</span>
+        <h3>Homeowners &amp; Renters</h3>
+        <p>Document your space for insurance, renovation planning, or moving day — without hiring a surveyor.</p>
+        <ul class="a-list">
+          <li>Map every room in under 5 minutes</li>
+          <li>Know exact dimensions instantly</li>
+          <li>Export PDF for contractors or movers</li>
+          <li>Archive your home layout digitally</li>
+        </ul>
+      </div>
+      <div class="a-card reveal reveal-delay-2">
+        <span class="a-emoji">🏢</span>
+        <h3>Real Estate Agents &amp; Landlords</h3>
+        <p>Scan listings on-site, attach professional floor plans to MLS listings, and close faster.</p>
+        <ul class="a-list">
+          <li>Scan before or during showings</li>
+          <li>PDF floor plans ready for listings</li>
+          <li>3D USDZ for virtual walkthroughs</li>
+          <li>Credit packs scale with your volume</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════ HOW IT WORKS ══════════════ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-tag reveal">How It Works</div>
+    <div class="section-title reveal reveal-delay-1">Four steps from scan to export.</div>
+    <div class="steps-timeline">
+      <div class="step reveal reveal-delay-1">
+        <div class="step-asset">📱 App home screen<br><span style="font-size:10px;opacity:0.6">→ src="assets/step-1.png"</span></div>
+        <div class="step-num-wrap"><span class="step-num">01</span></div>
+        <h4>Create a Property</h4>
+        <p>Add your address and number of floors. Takes 30 seconds.</p>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-asset">📱 Live scan with LiDAR overlay<br><span style="font-size:10px;opacity:0.6">→ src="assets/step-2.png"</span></div>
+        <div class="step-num-wrap"><span class="step-num">02</span></div>
+        <h4>Scan Your Room</h4>
+        <p>Walk slowly around the room. RoomPlan detects everything in real-time.</p>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-asset">📱 Correction canvas<br><span style="font-size:10px;opacity:0.6">→ src="assets/step-3.png"</span></div>
+        <div class="step-num-wrap"><span class="step-num">03</span></div>
+        <h4>Review &amp; Correct</h4>
+        <p>Tap any element to fine-tune dimensions or door types.</p>
+      </div>
+      <div class="step reveal reveal-delay-4">
+        <div class="step-asset">📱 PDF preview / export<br><span style="font-size:10px;opacity:0.6">→ src="assets/step-4.png"</span></div>
+        <div class="step-num-wrap"><span class="step-num">04</span></div>
+        <h4>Export PDF</h4>
+        <p>Use 1 credit to generate a professional PDF. Share via AirDrop or email.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DEMO VIDEO ══════════════ -->
+<section class="video-section">
+  <div class="section-inner" style="max-width:900px">
+    <div class="section-tag reveal" style="text-align:center">Demo</div>
+    <div class="section-title reveal reveal-delay-1" style="text-align:center;max-width:600px;margin-left:auto;margin-right:auto">See a full scan in 90 seconds.</div>
+    <div class="video-wrap reveal reveal-delay-2">
+      <!--
+        ╔══════════════════════════════════════════════════╗
+        ║  VIDEO ASSET ZONE                                ║
+        ║  Record a 60–90s screen recording:              ║
+        ║    1. Create property                           ║
+        ║    2. Scan a room (walk around slowly)          ║
+        ║    3. Correct one element                       ║
+        ║    4. Export → PDF preview                      ║
+        ║                                                  ║
+        ║  Save as: assets/demo.mp4                        ║
+        ║  Poster frame: assets/demo-poster.jpg           ║
+        ║                                                  ║
+        ║  Replace the div below with:                    ║
+        ║  <video src="assets/demo.mp4"                   ║
+        ║    controls autoplay muted loop                 ║
+        ║    poster="assets/demo-poster.jpg">             ║
+        ║  </video>                                        ║
+        ║                                                  ║
+        ║  OR embed YouTube:                              ║
+        ║  <iframe src="https://youtube.com/embed/..."    ║
+        ║    allow="autoplay" allowfullscreen></iframe>   ║
+        ╚══════════════════════════════════════════════════╝
+      -->
+      <div class="video-placeholder">
+        <div class="play-ring"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div class="video-asset-label">Demo Video — Drop In Here</div>
+        <div class="video-asset-code">
+          &lt;!-- Option 1: Local video --&gt;<br>
+          &lt;video src="assets/demo.mp4" controls poster="assets/demo-poster.jpg"&gt;&lt;/video&gt;<br><br>
+          &lt;!-- Option 2: YouTube embed --&gt;<br>
+          &lt;iframe src="https://youtube.com/embed/YOUR_ID" allowfullscreen&gt;&lt;/iframe&gt;
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════ PRICING ══════════════ -->
+<section class="section" id="pricing">
+  <div class="section-inner">
+    <div class="section-tag reveal" style="text-align:center">Pricing</div>
+    <div class="section-title reveal reveal-delay-1" style="text-align:center;max-width:500px;margin-left:auto;margin-right:auto">Simple, transparent<br>pricing.</div>
+    <div class="pricing-grid reveal reveal-delay-2">
+      <div class="p-card">
+        <div class="p-tier">Free</div>
+        <div class="p-price">$0 <span style="font-size:1rem;font-weight:300;color:var(--muted)">CAD</span></div>
+        <div class="p-desc">Unlimited scanning &amp; correction</div>
+        <ul class="p-features">
+          <li>Unlimited LiDAR scans</li>
+          <li>Full manual correction tools</li>
+          <li>3D USDZ model preview</li>
+          <li>Multi-floor property manager</li>
+        </ul>
+        <a href="#" class="p-cta">Download Free</a>
+      </div>
+      <div class="p-card featured">
+        <div class="p-tier">Pro</div>
+        <div class="p-price"><sup>$</sup>4.99 <span style="font-size:1rem;font-weight:300;color:rgba(255,255,255,0.5)">CAD</span></div>
+        <div class="p-desc">Everything in Free + per PDF export</div>
+        <ul class="p-features">
+          <li>Everything in the Free plan</li>
+          <li>1 professional PDF floor plan export</li>
+          <li>Full property + floor structure</li>
+          <li>Dimension lines, north arrow &amp; scale bar</li>
+          <li>Share via AirDrop, email or Files</li>
+        </ul>
+        <a href="#" class="p-cta">Get Started</a>
+      </div>
+      <div class="p-card" style="display:flex;flex-direction:column;justify-content:space-between">
+        <div>
+          <div class="p-tier">Enterprise</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:-0.5px;line-height:1.1">Custom<br>pricing.</div>
+          <div class="p-desc">For agencies, brokerages &amp; landlords with high-volume scan needs</div>
+          <ul class="p-features">
+            <li>Volume export credits</li>
+            <li>Priority support</li>
+            <li>Custom billing &amp; invoicing</li>
+            <li>Team account management</li>
+          </ul>
+        </div>
+        <a href="mailto:hello@ihomemap.com" class="p-cta" style="margin-top:28px">Contact Us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════ ROADMAP ══════════════ -->
+<section class="section" id="roadmap" style="background:var(--navy2)">
+  <div class="section-inner">
+    <div class="section-tag reveal" style="text-align:center">Roadmap</div>
+    <div class="section-title reveal reveal-delay-1" style="text-align:center">What's live. What's next.</div>
+    <div class="roadmap-list">
+      <div class="rm-item reveal reveal-delay-1">
+        <div class="rm-badge badge-live">✓ Live</div>
+        <div>
+          <h4>v1 — Core Scan &amp; Export</h4>
+          <p>LiDAR scanning, floor plan correction, 7 door types (swing, sliding, folding, revolving, double swing, shutter, patio), PDF &amp; USDZ export, multi-floor property management, and StoreKit credit system.</p>
+        </div>
+      </div>
+      <div class="rm-item reveal reveal-delay-2">
+        <div class="rm-badge badge-r2">R2 · Coming</div>
+        <div>
+          <h4>Scan-Time Photo &amp; Video Capture</h4>
+          <p>Capture reference photos during LiDAR scans so you can visually verify room details and catch elements RoomPlan missed — doors behind furniture, shower enclosures, stairs.</p>
+        </div>
+      </div>
+      <div class="rm-item reveal reveal-delay-3">
+        <div class="rm-badge badge-r2">R2 · Coming</div>
+        <div>
+          <h4>AI Auto-Correction</h4>
+          <p>Core ML models that automatically detect and fix common scan defects — missed elements, misclassified furniture, incorrect wall angles — trained on real scan data.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════ FAQ ══════════════ -->
+<section class="section" id="faq">
+  <div class="section-inner">
+    <div class="section-tag reveal" style="text-align:center">Support &amp; FAQ</div>
+    <div class="section-title reveal reveal-delay-1" style="text-align:center">Common questions.</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Which iPhones support iHomeMap? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">iHomeMap requires an iPhone or iPad with a LiDAR Scanner running iOS 16 or later. LiDAR is available on: iPhone 12 Pro, 13 Pro, 14 Pro, 15 Pro (all variants), iPad Pro (2020 and later). Standard iPhone models do not have LiDAR and are not supported for scanning.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is scanning free? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — scanning and manual correction are completely free with no limits. Credits are only required when you export a floor plan as a PDF. The 3D USDZ model preview inside the app is always free.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How does export pricing work? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Each PDF export costs $4.99 CAD, purchased directly through the App Store as an in-app purchase. There are no subscriptions or bundles — you pay per export, only when you need one. For high-volume needs, contact us about enterprise pricing.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How accurate are the floor plans? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">iHomeMap uses Apple's RoomPlan framework which is accurate to within a few centimetres on most surfaces. Accuracy can be reduced by highly reflective surfaces (mirrors, glass), very dark rooms, or rooms smaller than ~2m × 2m. The manual correction tools let you fine-tune any measurement after scanning.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I scan multiple floors? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Create a property, add as many floors as needed, then scan each room within each floor. Each floor's scans are combined into a single PDF export. You use one credit per floor-level PDF export.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Where is my scan data stored? <span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">All scan data is stored locally on your device using iOS secure storage. Nothing is uploaded to external servers. Your floor plan data stays private on your phone.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo"><b>i</b>HomeMap</a>
+      <p>LiDAR-powered floor plans for homeowners, agents, and landlords. Built for iOS with Apple RoomPlan.</p>
+    </div>
+    <div>
+      <h5>Product</h5>
+      <ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="how-it-works.html">How It Works</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="roadmap.html">Roadmap</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Support</h5>
+      <ul>
+        <li><a href="support.html">FAQ</a></li>
+        <li><a href="mailto:support@ihomemap.com">Contact</a></li>
+        <li><a href="support.html">LiDAR Requirements</a></li>
+        <li><a href="pricing.html">Credits Guide</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Use</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 iHomeMap. All rights reserved.</span>
+    <span>iOS 16+ · Requires LiDAR · App Store</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/hero-canvas.js"></script>
+<script src="js/scan-animation.js"></script>
+</body>
+</html>
