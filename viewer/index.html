@@ -52,12 +52,19 @@
     }
 
     async function main() {
-      const ply = new URLSearchParams(location.search).get("ply") || "";
-      if (!ply) return fail("No model specified.");
-
-      const url = /^https?:\/\//.test(ply)
-        ? ply
-        : `${API_BASE}/v2/splat/${encodeURIComponent(ply)}.ply`;
+      const params = new URLSearchParams(location.search);
+      const token = params.get("t") || "";
+      const ply   = params.get("ply") || "";
+      let url;
+      if (token) {
+        url = `${API_BASE}/v2/shared/${encodeURIComponent(token)}.ply`;   // paid full
+      } else if (ply) {
+        url = /^https?:\/\//.test(ply)
+          ? ply
+          : `${API_BASE}/v2/splat/${encodeURIComponent(ply)}.ply`;        // dev preview
+      } else {
+        return fail("No model specified.");
+      }
 
       // Import the library only after the import map is in place.
       let GS;
